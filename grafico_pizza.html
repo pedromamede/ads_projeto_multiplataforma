@@ -1,0 +1,90 @@
+<html>
+  <head>
+    <title>ADS UNIFOR - Projeto Multiplataforma 2</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="text-center" style="margin-bottom: 50px; padding-top: 30px; padding-bottom: 30px ;background-color: #3737fb; color: white;">
+      <h1>ADS UNIFOR - Projeto Multiplataforma 2</h1>
+    </div>  
+    <div class="container" style="font-size: 1.5rem;">
+      <div class="row text-center">
+        <h1 class="display-4">Gráfico pizza</h1>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-lg-6">
+          <form id="chartForm">
+            <div class="form-group">
+              <label for="rotulo">Rótulo dos valores:</label>
+              <input type="text" class="form-control mt-2" id="rotulo" style="font-size: 2rem">
+              <small class="form-text text-muted">Exemplo: Horas por mês</small>
+            </div>
+
+            <div class="form-group mt-3">
+              <label for="conjuntos">Conjunto de dados (separados por vírgula):</label>
+              <input type="text" class="form-control mt-2" id="conjuntos" style="font-size: 2rem">
+              <small class="form-text text-muted">Exemplo: Sono, Trabalho, Sono , Lazer </small>
+            </div>
+
+            <div class="form-group mt-3">
+              <label for="valores">Valores dos conjuntos (separados por vírgula):</label>
+              <input type="text" class="form-control mt-2" id="valores" style="font-size: 2rem">
+              <small class="form-text text-muted">Exemplo: 200, 180, 25, 30</small>
+            </div>
+        
+            <button type="button" class="btn btn-primary mt-5" style="font-size: 2rem" onclick="generateChart()">Gerar gráfico</button>
+            <a href="/" class="btn btn-secondary mt-5" style="font-size: 2rem">Voltar</a>
+          </form>
+        </div>
+        <div class="col-lg-6">
+          <div id="chartWrapper" class="mt-4">
+            <canvas id="lineChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function generateChart() {
+        var rotulo         = document.getElementById('rotulo').value;
+        var conjuntosInput = document.getElementById('conjuntos').value;
+        var valoresInput   = document.getElementById('valores').value;
+    
+        var conjuntos = conjuntosInput.split(',').map(function(item) {
+          return item.trim();
+        });
+
+        var valores = valoresInput.split(',').map(function(item) {
+          return parseInt(item.trim(), 10);
+        });
+
+        var wrapperElement = document.getElementById('chartWrapper');
+        wrapperElement.innerHTML = '';
+
+        var newCanvas = document.createElement('canvas');
+        newCanvas.id = 'lineChart';
+        wrapperElement.appendChild(newCanvas);
+
+        var chartCanvas = document.getElementById('lineChart');
+        var ctx = chartCanvas.getContext('2d');
+
+        var myChart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+            labels: conjuntos,
+            datasets: [{
+              label: rotulo,
+              data: valores,
+              borderWidth: 2,
+              fill: false
+            }]
+          }
+          },
+        );
+      }
+    </script>
+  </body>
+</html>
