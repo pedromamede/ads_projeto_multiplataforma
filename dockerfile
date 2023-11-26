@@ -1,6 +1,6 @@
 FROM ruby:3.1.0
 
-RUN gem install puma sinatra
+RUN gem install puma sinatra rspec rack-test
 
 COPY ./ /
 WORKDIR /
