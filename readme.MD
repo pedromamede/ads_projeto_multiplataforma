@@ -13,6 +13,6 @@
 - Executar o comando `docker-compose up --build` na raiz do projeto
 - Acessar com o browser `http://localhost:3000`
 
-# Como rodas os testes automatizados
+# Como executar os testes automatizados
 
 - Com a aplicação rodando no container do docker execute: `docker-compose exec app rspec spec/app_spec.rb -fd`
