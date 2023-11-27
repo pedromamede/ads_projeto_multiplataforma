@@ -2,18 +2,18 @@ require 'sinatra'
 
 class Application < Sinatra::Base
   get '/' do
-    send_file "pergunta.html"
+    send_file "views/pergunta.html"
   end
 
   get '/grafico_linha' do
-    send_file "grafico_linha.html"
+    send_file "views/grafico_linha.html"
   end
 
   get '/grafico_barra' do
-    send_file "grafico_barra.html"
+    send_file "views/grafico_barra.html"
   end
 
   get '/grafico_pizza' do
-    send_file "grafico_pizza.html"
+    send_file "views/grafico_pizza.html"
   end
 end
